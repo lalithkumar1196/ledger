@@ -5,7 +5,7 @@ wezvabackendapp:
       tag: rel4
 backendSvc:
   ports:
-  - nodePort: 30000
+  - nodePort: 30003
     port: 8080
     protocol: TCP
     targetPort: 8080
