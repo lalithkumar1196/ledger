@@ -1,8 +1,8 @@
 wezvabackendapp:
   wezvabackendapp:
     image:
-      image: 081654307023.dkr.ecr.ap-south-1.amazonaws.comwezvatechbackend
-      tag: fb36
+      image: public.ecr.aws/nginx/nginx:latest
+#     tag: fb36
 backendSvc:
   ports:
   - nodePort: 30001
