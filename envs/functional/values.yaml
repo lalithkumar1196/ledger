@@ -1,8 +1,7 @@
 wezvabackendapp:
-  wezvabackendapp:
-    image:
-      image: public.ecr.aws/nginx/nginx:latest
-#     tag: fb36
+  image:
+    repository: public.ecr.aws/nginx/nginx
+    tag: latest
 backendSvc:
   ports:
   - nodePort: 30001
