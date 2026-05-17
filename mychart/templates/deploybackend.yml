@@ -53,9 +53,8 @@ spec:
         resources: {{- toYaml .Values.wezvabackendapp.wezvabackendapp.resources | nindent
           10 }}
         volumeMounts:
-        - mountPath: /opt/wezva/application.properties
+        - mountPath: /config
           name: testconfigmap
-          subPath: application.properties
       imagePullSecrets:
       - name: awsecr-cred
       initContainers:
