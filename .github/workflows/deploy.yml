@@ -13,27 +13,31 @@ ECRURL:
 description: "ECR Registry URL (with / at end)"
 required: true
 default: "081654307023.dkr.ecr.ap-south-1.amazonaws.com/"
-REPO:
-description: "Repository Name"
-required: true
-default: "ledger"
-IMAGE:
-description: "Image Tag"
-required: true
-TEST:
-description: "Environment"
-required: true
-type: choice
-options:
-- functional
-- integration
-- regression
-- uat
-- release
+
+  REPO:
+    description: "Repository Name"
+    required: true
+    default: "ledger"
+
+  IMAGE:
+    description: "Image Tag"
+    required: true
+
+  TEST:
+    description: "Environment"
+    required: true
+    type: choice
+    options:
+      - functional
+      - integration
+      - regression
+      - uat
+      - release
 
 jobs:
 deploy:
 runs-on: ubuntu-latest
+
 steps:
   - name: Checkout Repository
     uses: actions/checkout@v4
