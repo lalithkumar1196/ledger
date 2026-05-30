@@ -37,7 +37,11 @@ wezvaledgerapp:
   topologySpreadConstraints: []
   wezvaledgerapp:
     image:
+<<<<<<< HEAD
       repository: 081654307023.dkr.ecr.ap-south-1.amazonaws.com/wezvatechledger
+=======
+      repository: 081654307023.dkr.ecr.ap-south-1.amazonaws.com/wezvatechbackend
+>>>>>>> e9bc67575a97332caaac29e98023134a6c4be16d
       tag: fb1
     imagePullPolicy: IfNotPresent
     resources:

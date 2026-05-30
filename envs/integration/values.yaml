@@ -5,7 +5,7 @@ wezvaledgerapp:
       tag: fb6
 ledgerSvc:
   ports:
-  - nodePort: 30000
+  - nodePort: 30002
     port: 8080
     protocol: TCP
     targetPort: 8080
