@@ -7,59 +7,69 @@ on:
     branches:
       - main
 
-workflow_dispatch:
-inputs:
-ECRURL:
-description: "ECR Registry URL (with / at end)"
-required: true
-default: "081654307023.dkr.ecr.ap-south-1.amazonaws.com/"
-
-REPO:
-    description: "Repository Name"
-    required: true
-    default: "ledger"
-IMAGE:
-    description: "Image Tag"
-    required: true
-TEST:
-    description: "Environment"
-    required: true
-    type: choice
-    options:
-      - functional
-      - integration
-      - regression
-      - uat
-      - release
+  workflow_dispatch:
+    inputs:
+      ECRURL:
+        description: "ECR Registry URL (with / at end)"
+        required: true
+        default: "081654307023.dkr.ecr.ap-south-1.amazonaws.com/"
+      REPO:
+        description: "Repository Name"
+        required: true
+        default: "wezvatechledger"
+      IMAGE:
+        description: "Image Tag"
+        required: true
+        default: "rel28"
+      TEST:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+          - functional
+          - integration
+          - regression
+          - uat
+          - release
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v4
-    with:
-      token: ${{ secrets.GH_PAT }}
+    steps:
+      # -----------------------------
+      # Checkout Deployment Repo
+      # -----------------------------
+      - name: Checkout Deployment Repo
+        uses: actions/checkout@v4
+        with:
+          repository: lalithkumar1196/ledger
+          ref: main
+          token: ${{ secrets.GH_PAT }}
 
-  - name: Update Helm values
-    if: github.event_name == 'workflow_dispatch'
-    run: |
-      cd envs/${{ inputs.TEST }}
+      - name: Update Helm values
+        run: |
+          cd envs/${{ inputs.TEST }}
 
-      sed -i "s|repository:.*|repository: ${{ inputs.ECRURL }}${{ inputs.REPO }}|g" values.yaml
-      sed -i "s|tag:.*|tag: ${{ inputs.IMAGE }}|g" values.yaml
+          echo "Updating image repository..."
+          sed -i "s|repository:.*|repository: ${{ inputs.ECRURL }}${{ inputs.REPO }}|g" values.yaml
 
-      cat values.yaml
+          echo "Updating image tag..."
+          sed -i "s|tag:.*|tag: ${{ inputs.IMAGE }}|g" values.yaml
 
-  - name: Commit and Push
-    if: github.event_name == 'workflow_dispatch'
-    run: |
-      git config user.name "github-actions"
-      git config user.email "actions@github.com"
+          echo "Updated values.yaml:"
+          cat values.yaml
 
-      git add envs/${{ inputs.TEST }}/values.yaml
 
-      git commit -m "New deployment for Build ${{ inputs.IMAGE }}" || echo "No changes to commit"
+      # -----------------------------
+      # Commit & Push Changes
+      # -----------------------------
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-      git push origin main
+          git add .
+          git commit -m "New deployment for Build ${{ inputs.IMAGE }}" || echo "No changes to commit"
+
+          git push origin main
