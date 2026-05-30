@@ -34,6 +34,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      ENV_NAME: ${{ inputs.TEST || 'functional' }}
+      ECR_URL: ${{ inputs.ECRURL || '081654307023.dkr.ecr.ap-south-1.amazonaws.com/' }}
+      REPO_NAME: ${{ inputs.REPO || 'ledger' }}
+      IMAGE_TAG: ${{ inputs.IMAGE }}
 
     steps:
       # -----------------------------
