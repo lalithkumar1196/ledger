@@ -14,16 +14,14 @@ description: "ECR Registry URL (with / at end)"
 required: true
 default: "081654307023.dkr.ecr.ap-south-1.amazonaws.com/"
 
-  REPO:
+REPO:
     description: "Repository Name"
     required: true
     default: "ledger"
-
-  IMAGE:
+IMAGE:
     description: "Image Tag"
     required: true
-
-  TEST:
+TEST:
     description: "Environment"
     required: true
     type: choice
