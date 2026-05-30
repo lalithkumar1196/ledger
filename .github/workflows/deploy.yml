@@ -16,7 +16,7 @@ on:
       REPO:
         description: "Repository Name"
         required: true
-        default: "wezvatechledger"
+        default: "ledger"
       IMAGE:
         description: "Image Tag"
         required: true
@@ -55,7 +55,7 @@ jobs:
         env:
           ENV_NAME: ${{ github.event.inputs.TEST || 'functional' }}
           ECR_URL: ${{ github.event.inputs.ECRURL || '081654307023.dkr.ecr.ap-south-1.amazonaws.com/' }}
-          REPO_NAME: ${{ github.event.inputs.REPO || 'wezvatechledger' }}
+          REPO_NAME: ${{ github.event.inputs.REPO || 'ledger' }}
           IMAGE_TAG: ${{ github.event.inputs.IMAGE || 'rel28' }}
         run: |
           cd envs/${{ env.ENV_NAME }}
