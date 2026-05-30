@@ -16,7 +16,7 @@ on:
       REPO:
         description: "Repository Name"
         required: true
-        default: "wezvatechledger"
+        default: "ledger"
       IMAGE:
         description: "Image Tag"
         required: true
