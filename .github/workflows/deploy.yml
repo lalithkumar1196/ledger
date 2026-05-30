@@ -61,4 +61,3 @@ steps:
       git commit -m "New deployment for Build ${{ inputs.IMAGE }}" || echo "No changes to commit"
 
       git push origin main
-```
