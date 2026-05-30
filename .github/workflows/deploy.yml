@@ -20,7 +20,6 @@ on:
       IMAGE:
         description: "Image Tag"
         required: true
-        default: "rel28"
       TEST:
         description: "Environment"
         required: true
