@@ -1,11 +1,11 @@
 name: CD Pipeline
 
 on:
-push:
-branches:
-- main
-paths:
-- 'envs/**'
+  push:
+    paths:
+      - 'envs/**'
+    branches:
+      - main
 
 workflow_dispatch:
 inputs:
