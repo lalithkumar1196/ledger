@@ -51,7 +51,6 @@ jobs:
       # -----------------------------
       - name: Update Helm values
         # Evaluates inputs safely inside the execution scope
-        env:
         run: |
           cd envs/**
 
