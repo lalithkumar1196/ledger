@@ -34,11 +34,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      ENV_NAME: ${{ inputs.TEST || 'functional' }}
-      ECR_URL: ${{ inputs.ECRURL || '081654307023.dkr.ecr.ap-south-1.amazonaws.com/' }}
-      REPO_NAME: ${{ inputs.REPO || 'ledger' }}
-      IMAGE_TAG: ${{ inputs.IMAGE }}
 
     steps:
       # -----------------------------
@@ -57,12 +52,8 @@ jobs:
       - name: Update Helm values
         # Evaluates inputs safely inside the execution scope
         env:
-          ENV_NAME: ${{ github.event.inputs.TEST || 'functional' }}
-          ECR_URL: ${{ github.event.inputs.ECRURL || '081654307023.dkr.ecr.ap-south-1.amazonaws.com/' }}
-          REPO_NAME: ${{ github.event.inputs.REPO || 'ledger' }}
-          IMAGE_TAG: ${{ github.event.inputs.IMAGE }}
         run: |
-          cd envs/${{ env.ENV_NAME }}
+          cd envs/**
 
           echo "Updating image repository..."
           sed -i "s|repository:.*|repository: ${{ env.ECR_URL }}${{ env.REPO_NAME }}|g" values.yaml
